@@ -1,0 +1,703 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    font-family: 'Poppins', sans-serif;
+    /* outline: 1px solid #f00 !important; */
+}
+
+html {
+    background-color: #201F31;
+    /* --s: 123px; */
+    /* control the size*/
+    /* --c1: #231f1f;
+    --c2: #171616;
+
+    --_g: #0000 90deg, var(--c1) 0;
+    background:
+        conic-gradient(from 90deg at 2px 2px, var(--_g)),
+        conic-gradient(from 90deg at 1px 1px, var(--_g)),
+        var(--c2);
+    background-size: var(--s) var(--s), calc(var(--s)/5) calc(var(--s)/5); */
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
+#wrapper {
+    height: 100%;
+    width: 100%;
+}
+
+.supreme-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5rem;
+    position: relative;
+}
+
+h1 {
+    cursor: pointer;
+    color: white;
+    /* margin-top: 13rem; */
+    margin-bottom: 7rem;
+    padding: 0 1rem;
+    box-shadow: 0px 5px 0px 0px rgba(65, 117, 5, 1),
+        0px 10px 0px 0px rgba(65, 117, 5, 0.6),
+        0px 15px 0px 0px rgba(65, 117, 5, 0.4),
+        0px 20px 0px 0px rgba(65, 117, 5, 0.2),
+        0px 25px 0px 0px rgba(65, 117, 5, 0.1);
+}
+
+.main-content {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10rem;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+
+.supreme-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+
+.image-container {
+    height: 200PX;
+    width: 115px;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    background: no-repeat;
+    background-size: cover;
+}
+
+img:hover {
+    transform: scale(1.1) translateY(5%);
+    transition: all 0.5s;
+}
+
+.main-content .image-container {
+    position: relative;
+    transition: all 0.5s;
+    filter: brightness(0);
+}
+
+/* adding effetcs to the images which lie on right side of the hovered image  */
+.main-content .image-container:hover {
+    filter: brightness(1);
+    transform: translateZ(200px);
+}
+
+.main-content .image-container:hover+* {
+    filter: brightness(0.6);
+    transform: translateZ(150px) rotateY(40deg);
+}
+
+.main-content .image-container:hover+*+* {
+    filter: brightness(0.3);
+    transform: translateZ(70px) rotateY(20deg);
+}
+
+.main-content .image-container:hover+*+*+* {
+    filter: brightness(0.2);
+    transform: translateZ(30px) rotateY(10deg);
+}
+
+/* adding effetcs to the images which lie on left side of the hovered image  */
+
+.main-content .image-container:has(+ *:hover) {
+    filter: brightness(0.6);
+    transform: translateZ(150px) rotateY(-40deg);
+}
+
+.main-content .image-container:has(+ * + *:hover) {
+    filter: brightness(0.3);
+    transform: translateZ(70px) rotateY(-20deg);
+}
+
+.main-content .image-container:has(+ * + * + *:hover) {
+    filter: brightness(0.2);
+    transform: translateZ(30px) rotateY(-10deg);
+}
+
+.image-container p {
+    position: absolute;
+    cursor: pointer;
+    color: white;
+    width: 300px;
+    transform: scaleX(0);
+    transform-origin: center;
+    right: calc(50% - 150px);
+    bottom: -3rem;
+    text-align: center;
+}
+
+.image-container:hover p {
+    transform: scaleX(1);
+    transition: all 0.3s;
+}
+
+.top-scrollbar {
+    position: fixed;
+    top: 0;
+    height: 7px;
+    width: 100%;
+    background-color: limegreen;
+    z-index: 1000;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: scroll-animation linear;
+    animation-timeline: scroll();
+}
+
+@keyframes scroll-animation {
+    0% {
+        transform: scaleX(0);
+    }
+
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+.bottom-scrollbar {
+    position: fixed;
+    bottom: 0;
+    height: 7px;
+    right: 0;
+    width: 100%;
+    background-color: limegreen;
+    z-index: 1000;
+    transform: scaleX(0);
+    transform-origin: right;
+    animation: scroll-animation-bottom linear;
+    animation-timeline: scroll();
+}
+
+@keyframes scroll-animation-bottom {
+    0% {
+        transform: scaleX(0);
+    }
+
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+
+.left-scrollbar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    width: 7px;
+    background-color: limegreen;
+    z-index: 1000;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    animation: scroll-animation-left linear;
+    animation-timeline: scroll();
+}
+
+@keyframes scroll-animation-left {
+    0% {
+        transform: scaleY(0);
+    }
+
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+.right-scrollbar {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 7px;
+    background-color: limegreen;
+    z-index: 1000;
+    transform: scaleY(0);
+    transform-origin: top;
+    animation: scroll-animation-right linear;
+    animation-timeline: scroll();
+}
+
+@keyframes scroll-animation-right {
+    0% {
+        transform: scaleY(0);
+    }
+
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+.autoShow {
+    animation: autoShowAnimation linear both;
+    animation-timeline: view();
+}
+
+
+@keyframes autoShowAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(100px) scale(0);
+    }
+
+    40%,
+    50% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(100px) scale(0.5);
+    }
+}
+
+.left-shuriken-image-container {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    height: 100px;
+    z-index: 1000;
+}
+
+.right-shuriken-image-container {
+    all: unset;
+    position: fixed;
+    right: 1rem;
+    top: 1rem;
+    height: 100px;
+    z-index: 1000;
+}
+
+.autoRotate {
+    animation: autoRotateAnimation linear;
+    animation-timeline: scroll();
+}
+
+@keyframes autoRotateAnimation {
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotate(3600deg);
+    }
+}
+
+/*  animating side chaeracters images container separately */
+
+.side-characters-images-container {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+
+.side-characters-images-container .supreme-image-container .image-container {
+    width: 150px;
+    height: 250px;
+}
+
+.supreme-image-container .image-container {
+    position: relative;
+    transition: all 0.5s;
+    filter: brightness(0);
+}
+
+/* adding effetcs to the images which lie on right side of the hovered image  */
+.supreme-image-container .image-container:hover {
+    filter: brightness(1);
+    transform: translateZ(150px);
+}
+
+.supreme-image-container .image-container:hover+* {
+    filter: brightness(0.6);
+    transform: translateZ(70px) rotateY(40deg);
+}
+
+/* adding effetcs to the images which lie on left side of the hovered image  */
+
+.supreme-image-container .image-container:has(+ *:hover) {
+    filter: brightness(0.6);
+    transform: translateZ(70px) rotateY(-40deg);
+}
+
+.wall-heading {
+    color: khaki;
+    text-align: center;
+    user-select: none;
+    font-weight: 900;
+    width: 90vw;
+    font-size: 12rem;
+    margin-bottom: 0;
+    margin-top: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    box-shadow: 0px 0px 40px 37px rgba(255, 149, 5, 0.3);
+}
+
+.topBox {
+    height: 100vh;
+    width: 100vw;
+    background-image: url(./assets/coverpage1.jpg);
+    background-size: cover;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.new-image-container {
+    height: 200px;
+    width: 130px;
+    border-radius: 10PX;
+    position: absolute;
+    overflow: hidden;
+    transition: all 0.2s;
+    z-index: 5;
+}
+
+.new-image-container.front {
+    z-index: 15;
+}
+
+.new-image-container.back {
+    z-index: 5;
+}
+
+.divImage {
+    height: 100%;
+    width: 100%;
+    transform: translateY(100%);
+    object-fit: cover;
+}
+
+.topBox2 {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-image: url(./assets/minimalisticDesign_1.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.anime-covers-container {
+    height: 76%;
+    width: 70%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 5px 5px 7px rgb(105, 102, 102);
+    /* box-shadow: 0px -25px 20px -20px rgba(0, 0, 0, 0.45), 0px 25px 20px -20px rgba(0, 0, 0, 0.45); */
+    box-shadow: 0px -25px 20px -20px rgba(234, 228, 228, 0.45),
+        0px 25px 20px -20px rgba(234, 228, 228, 0.45);
+}
+
+.coverImage {
+    all: unset;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transition: all 0.5s;
+}
+
+.left-button {
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.right-button {
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+.coverBtn {
+    background-color: rgb(255, 0, 0);
+    color: white;
+    border: none;
+    height: 50px;
+    width: 100px;
+    cursor: pointer;
+    transform-origin: left;
+    transition: background-color 0.5s, transform 0.5s;
+    z-index: 1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.coverBtn::before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #1f1f1f;
+    z-index: -1;
+    transition: transform 0.3s;
+    transform-origin: top left;
+    transform: scaleX(0);
+}
+
+.coverBtn:hover {
+    transition: all 0.2s;
+    box-shadow: 5px 5px 7px rgb(105, 102, 102);
+    color: yellow;
+}
+
+.coverBtn:hover::before {
+    transform: scaleX(1);
+}
+
+section {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.section1 {
+    background-image: url(./assets/background2.png);
+    position: relative;
+}
+
+.section1 .main-content {
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.section1 .main-content:hover {
+    transition: all 0.5s;
+    box-shadow: 0px 0px 70px 4px rgba(43, 228, 189, 0.77);
+}
+
+.section1 h1 {
+    all: unset;
+    font-size: 4rem;
+    color: #7D8ABC;
+    cursor: pointer;
+    font-weight: 800;
+    width: 90%;
+    text-align: center;
+    text-transform: uppercase;
+    mix-blend-mode: difference;
+    position: relative;
+    z-index: 100;
+}
+
+.headingHover {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.heading-hoverImage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    transition: all linear 0.3s;
+    opacity: 0;
+    z-index: 50;
+}
+
+.section1 p {
+    font-size: 1.3rem;
+    color: #244856;
+    font-weight: 600;
+    padding: 0.1rem 0;
+    position: absolute;
+    background-color: aliceblue;
+}
+
+
+.section2 {
+    background-image: url(./assets/minimalisticDesign_2.jpg);
+    position: relative;
+}
+
+.section2 h1 {
+    all: unset;
+    font-size: 4rem;
+    color: #7D8ABC;
+    cursor: pointer;
+    font-weight: 800;
+    width: 90%;
+    text-align: center;
+    text-transform: uppercase;
+    mix-blend-mode: difference;
+    position: relative;
+    z-index: 100;
+}
+
+.section2 p {
+    font-size: 1.3rem;
+    color: #2F3943;
+    font-weight: 600;
+    padding: 0.1rem 0;
+    position: absolute;
+    background-color: #ECE9E0;
+}
+
+.section2 .main-content {
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+
+.section2 .main-content:hover {
+    transition: all 0.5s;
+    box-shadow: 0px 0px 70px -1px rgba(237, 154, 47, 0.77);
+}
+
+.section3 {
+    background-image: url(./assets/minimalisticDesign_3.jpg);
+}
+
+.section3 h1 {
+    all: unset;
+    font-size: 4rem;
+    color: #06D001;
+    cursor: pointer;
+    font-weight: 800;
+    width: 90%;
+    text-align: center;
+    text-transform: uppercase;
+    mix-blend-mode: difference;
+    position: relative;
+    z-index: 100;
+}
+
+
+.section3 p {
+    font-size: 1.3rem;
+    color: #5D001D;
+    font-weight: 600;
+    padding: 0.1rem 0;
+    position: absolute;
+    background-color: #EDE2DC;
+}
+
+.section3 .main-content {
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.section3 .main-content:hover {
+    transition: all 0.5s;
+    box-shadow: 0px 0px 70px 4px rgba(43, 228, 189, 0.77);
+}
+
+.section4 {
+    background-image: url(./assets/minimalisticDesign_5.jpg);
+}
+
+.section4 h1 {
+    all: unset;
+    font-size: 4rem;
+    color: #7D8ABC;
+    cursor: pointer;
+    font-weight: 800;
+    width: 90%;
+    text-align: center;
+    text-transform: uppercase;
+    mix-blend-mode: difference;
+    position: relative;
+    z-index: 100;
+}
+
+.section4 p {
+    font-size: 1.3rem;
+    color: #106466;
+    font-weight: 600;
+    padding: 0.1rem 0;
+    position: absolute;
+    background-color: #D2E9E3;
+}
+
+.section4 .main-content {
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.section4 .main-content:hover {
+    transition: all 0.5s;
+    box-shadow: 0px 0px 70px 4px rgba(43, 228, 189, 0.77);
+}
+
+.section5 {
+    height: 100%;
+    padding: 10rem 0;
+    margin-bottom: 0;
+    background-image: url(./assets/minimalisticDesign_4.jpg);
+}
+
+.section5 h1 {
+    /* all: unset; */
+    font-size: 4rem;
+    color: #7D8ABC;
+    cursor: pointer;
+    font-weight: 800;
+    width: 90%;
+    text-align: center;
+    text-transform: uppercase;
+    mix-blend-mode: difference;
+    position: relative;
+    z-index: 100;
+}
+
+.section5 p {
+    font-size: 1.3rem;
+    color: #4E4A41;
+    font-weight: 600;
+    padding: 0.1rem 0;
+    position: absolute;
+    background-color: #89BDBB;
+}
+
+
+/* .section5{
+    background-image: url(./assets/background19.jpg);
+} */
